@@ -1,20 +1,16 @@
 <template>
-	<div>
-		<router-view 
-		  class = 'view'
-		  keep-alive
-		  transition
-		  transition-mode='out-in'>
+	<div id='app'>
+		<router-view> 
 		</router-view>
 	</div>
 </template>
 
 <script>
 export default {
-	components:{}
+	name:'app'
 }
 </script>
 
 <style lang='scss'>
- @import './style/style';
+	@import './style/style';
 </style>
