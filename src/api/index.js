@@ -1,4 +1,4 @@
-var root = '/api/v1'
+var root = 'https://cnodejs.org/api/v1'
 var axios = require('axios')
 
 function toType(obj){

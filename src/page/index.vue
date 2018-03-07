@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<Header></Header>
+		<img src='static/image/dota.jpg' alt='dota'>
 		<div class='article_list'>
 			<ul>
 				<li v-for='i in list'>

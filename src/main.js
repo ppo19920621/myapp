@@ -15,11 +15,7 @@ Vue.prototype.$utils = utils
 
 Vue.config.productionTip = false
 
-// 配置百度编辑器
-import '../static/ue/ueditor.config.js'
-import '../static/ue/ueditor.all.min.js'
-import '../static/ue/lang/zh-cn/zh-cn.js'
-import '../static/ue/ueditor.parse.min.js'
+
 
 // 跑起来
 new Vue({

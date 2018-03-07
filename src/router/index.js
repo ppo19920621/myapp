@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/page/index'
-import Content from '@/page/content'
-import Ue from '@/page/ue_test'
 
 Vue.use(Router)
 
@@ -10,13 +7,13 @@ export default new Router({
 	routes:[
 		{
 			path:'/',
-			component:Index
+			component: resolve => require(['@/page/index.vue'], resolve)
 		},{
 			path:'/content/:id',
-			component:Content
+			component: resolve => require(['@/page/content.vue'], resolve)
 		},{
 			path:'/ue',
-			component:Ue
+			component: resolve => require(['@/page/ue_test.vue'], resolve)
 		}
 	]
 })

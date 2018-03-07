@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 export default{
 	name:'ue',
 	data(){
@@ -18,10 +19,18 @@ export default{
 	},
 	mounted(){
 		const _this = this
-		this.editor = window.UE.getEditor('editor', this.config)
-		this.editor.addListener('ready',function(){
-			_this.editor.setContent(_this.value)		
-		})
+		let js_list = [
+			'static/ue/ueditor.config.js',
+			'static/ue/ueditor.all.min.js',
+			'static/ue/lang/zh-cn/zh-cn.js',
+			'static/ue/ueditor.parse.min.js'
+		]
+		this.$utils.getJS(js_list).then(() => {
+			_this.editor = window.UE.getEditor('editor', _this.config)
+			_this.editor.addListener('ready',function(){
+				_this.editor.setContent(_this.value)		
+			})
+		}).catch(e => console.log(e))	
 	},
 	methods:{
 		getUEContent(){
