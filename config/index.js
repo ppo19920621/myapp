@@ -10,10 +10,11 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/dist/',
+	// 代理配置表，配置特定的请求代理到对应的api接口
     proxyTable: {
 		'/api/v1/**':{
 			target:'https://cnodejs.org',	  
-			secure: false,
+			secure: false,		//https接口
 			changeOrigin: false
 		}
 	},

@@ -2,7 +2,7 @@
 
 > A Vue.js project
 
-根据FungLeo博客 http://blog.csdn.net/fungleo/article/details/77575077 弄的个人实践项目
+一开始是根据FungLeo博客 http://blog.csdn.net/fungleo/article/details/77575077 弄的个人实践项目,目前在根据自己的需求更改。
 
 ## Build Setup
 
