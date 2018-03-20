@@ -1,4 +1,8 @@
 *{ margin:0;padding:0;}
+img{ content:normal !important;}
 
+div{ width:600px;}
+
+a{ display:inline-block;transform:scale(0.9);}
 
 
