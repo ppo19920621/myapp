@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Uediter from '../components/ue.vue'
+import Uediter from '@/components/ue.vue'
 export default{
 	components: {Uediter},
 	data(){

@@ -4,6 +4,15 @@ const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
+const glob = require('glob')
+// 页面模板
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 取得相应页面路径
+const PAGE_PATH = path.resolve(__dirname, '../src/pages')
+// 用于做相应的merge处理
+const merge = require('webpack-merge')
+
+
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -99,3 +108,45 @@ exports.createNotifierCallback = () => {
     })
   }
 }
+
+// 多入口配置
+// 通过glob模块读取pages文件夹下的所有对应文件夹下的js后缀文件，用做入口处理
+exports.entries = function(){
+	var entryFiles = glob.sync(PAGE_PATH + '/*/*.js');
+	var map = {}
+	entryFiles.forEach((filePath) => {
+		var filename = filePath.substring(filePath.lastIndexOf('\/') + 1,filePath.lastIndexOf('.'))
+		map[filename] = filePath
+	})
+	return map
+}
+
+// 多页面输出配置
+// 读取pages文件夹下对应的html后缀文件
+exports.htmlPlugin = function(){
+	var entryHtml = glob.sync(PAGE_PATH + '/*/*.html')
+	var arr = []
+	entryHtml.forEach((filePath) => {
+		var filename = filePath.substring(filePath.lastIndexOf('\/') + 1,filePath.lastIndexOf('.'))
+		var conf = {
+			template:filePath,
+			filename:filename + '.html',
+			// 页面模板需要加载对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
+			chunks:['manifest', 'vendor', filename],
+			inject:true
+		}
+		if(process.env.NODE_ENV === 'production'){
+			conf = merge(conf, {
+				minify:{
+					removeComments:true,
+					collapseWhitespace:true,
+					removeAttributeQuotes:true
+				},
+				chunksSortMode:'dependency'
+			})
+		}
+		arr.push(new HtmlWebpackPlugin(conf))
+	})
+	return arr
+}
+
