@@ -9,9 +9,6 @@ import router from './router'
 import api from '@/api/index.js'
 // 将api方法绑定到全局
 Vue.prototype.$api = api
-// 引用工具文件并绑定到全局
-import utils from '@/api/utils.js'
-Vue.prototype.$utils = utils
 
 
 Vue.config.productionTip = false

@@ -1,17 +1,9 @@
 <template>
 	<div>
 		<Header></Header>
-		<img src='static/image/dota.jpg' alt='dota'>
-		<div class='article_list'>
-			<ul>
-				<li v-for='i in list'>
-					<time v-text='$utils.goodTime(i.create_at)'></time>
-					<router-link :to="'/content/'+i.id">
-						{{i.title}}
-					</router-link>
-				</li>
-			</ul>
-		</div>
+		<img src='/static/image/dota.jpg' alt='dota'>
+		<h3>个人资料</h3>
+		<div v-for='(value, key) in info'>{{key}}:{{value}}</div>
 		<Footer></Footer>
 	</div>
 </template>
@@ -23,7 +15,7 @@ export default {
 	components:{ Header,Footer},
 	data(){
 		return {
-			list:[]
+			info:{}
 		}
 	},
 	created(){
@@ -33,8 +25,14 @@ export default {
 	methods:{
 		getData(){
 			// 这里用全局绑定的$api方法来获取数据	
-			this.$api.get('topics', null, r => {
-				this.list = r.data	
+			this.$api.get('/user/get_user_info', null, r => {
+				console.log(r);
+				if(r.result === 0){
+					this.info = r.info	
+				}else{
+					alert(r.reason)
+					this.$router.push('/login')
+				}
 			})
 		},		
 	},

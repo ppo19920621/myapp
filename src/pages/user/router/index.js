@@ -9,11 +9,11 @@ export default new Router({
 			path:'/',
 			component: resolve => require(['../page/index.vue'], resolve)
 		},{
-			path:'/content/:id',
-			component: resolve => require(['../page/content.vue'], resolve)
+			path:'/register',
+			component: resolve => require(['../page/register.vue'], resolve)
 		},{
-			path:'/ue',
-			component: resolve => require(['../page/ue_test.vue'], resolve)
+			path:'/login',
+			component: resolve => require(['../page/login.vue'], resolve)
 		}
 	]
 })

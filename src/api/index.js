@@ -1,4 +1,4 @@
-var root = 'https://cnodejs.org/api/v1'
+var root = ''
 var axios = require('axios')
 
 function toType(obj){
@@ -21,7 +21,7 @@ function filterNull(o){
 	return o
 }
 
-function apiAxios(method, url, params, success, failure){
+function apiAxios(method, url, params, success){
 	if(params){
 		params = filterNull(params)
 	}
@@ -34,16 +34,8 @@ function apiAxios(method, url, params, success, failure){
 		withCredentials:false
 	})
 	.then(function(res){
-		if(res.data.success === true){
-			if(success){
-				success(res.data)
-			}
-		}else{
-			if(failure){
-				failure(res.data)
-			}else{
-				window.alert('error:'+JSON.stringify(res.data))
-			}
+		if(success){
+			success(res.data)
 		}
 	})
 	.catch(function(err){
@@ -55,17 +47,17 @@ function apiAxios(method, url, params, success, failure){
 }
 
 export default{
-	get:function(url, params, success, failure){
-		return apiAxios('GET', url, params, success, failure)
+	get:function(url, params, success){
+		return apiAxios('GET', url, params, success)
 	},
-	post:function(url, params, success, failure){
-		return apiAxios('POST', url, params, success, failure)
+	post:function(url, params, success){
+		return apiAxios('POST', url, params, success)
 	},
-	put:function(url, params, success, failure){
-		return apiAxios('PUT', url, params, success, failure)
+	put:function(url, params, success){
+		return apiAxios('PUT', url, params, success)
 	},
-	delete:function(url, params, success, failure){
-		return apiAxios('DELETE', url, params, success, failure)
+	delete:function(url, params, success){
+		return apiAxios('DELETE', url, params, success)
 	}
 }
 
