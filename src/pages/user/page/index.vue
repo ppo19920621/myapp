@@ -29,6 +29,7 @@ export default {
 				console.log(r);
 				if(r.result === 0){
 					this.info = r.info	
+					this.$store.commit('updateUser', r.info)
 				}else{
 					alert(r.reason)
 					this.$router.push('/login')
