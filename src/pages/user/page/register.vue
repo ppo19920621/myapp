@@ -2,16 +2,16 @@
 	<div>
 		<Header></Header>
 		<div class='register_box'>
-			<form id='register_form' novalidate='novalidate' >
+			<form id='register_form' novalidate='novalidate'>
 				<h3>用户注册</h3>
 				<label>用户名：</label>
-				<input type='text' name='account' value='' />
+				<input type='text' v-model='account' />
 				<br />
 				<label>密  码：</label>
-				<input type='password' name='pwd' value='' />
+				<input type='password' v-model='pwd' />
 				<br />
 				<label>重复密码：</label>
-				<input type='password' name='re_pwd' value='' />
+				<input type='password' v-model='re_pwd' />
 				<br />
 				<button type='button' @click='register'>注册</button>
 			</form>
@@ -27,18 +27,19 @@ import Footer from '@/components/footer.vue'
 export default {
 	components:{ Header, Footer},
 	data(){
-		return {}
+		return {
+			accoutn:'',
+			pwd:'',
+			re_pwd:''
+		}
 	},
 	created(){
 	
 	},
 	methods:{
 		register: function(){
-			let form = document.querySelector('#register_form');
-			let account = form.account.value;
-			let pwd = form.pwd.value;
-			let re_pwd = form.re_pwd.value;
-			this.$api.post('/user/register',{ account:account, pwd:pwd, re_pwd:re_pwd}, r => {
+			let req = { account:this.account, pwd:this.pwd, re_pwd:this.re_pwd};
+			this.$api.post('/user/register', req, r => {
 				console.log(r);
 				if(r.result === 0){
 					this.$router.push('/')

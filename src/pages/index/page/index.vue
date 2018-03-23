@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Header></Header>
-		<a href='user.html'>
+		<a href='/user'>
 			<img src='static/image/dota.jpg' alt='dota'>
 		</a>
 		<div class='article_list'>
