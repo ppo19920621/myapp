@@ -11,6 +11,7 @@
 				<input type='password' v-model='pwd' />
 				<br />
 				<button type='submit' @click='login'>登录</button>
+				<router-link to='/register' >去注册</router-link>
 			</form>
 		</div>
 		<Footer></Footer>
@@ -31,16 +32,17 @@ export default {
 	},
 	created(){
 	
-		console.log(this.$store.state.user)
 	},
 	methods:{
 		login: function(e){
 			e.preventDefault();
 			let req = { account:this.account, pwd:this.pwd}; 
 			this.$api.post('/user/login', req, r => {
-				console.log(r);
 				if(r.result === 0){
-					this.$router.push('/')
+					localStorage.change_time = Date.now();
+					localStorage.user = JSON.stringify(r.info);
+					this.$store.commit('updateUser', r.info);
+					this.$router.push('/');
 				}else{
 					alert(r.reason)
 				}

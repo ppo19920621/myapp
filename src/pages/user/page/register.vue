@@ -14,6 +14,7 @@
 				<input type='password' v-model='re_pwd' />
 				<br />
 				<button type='button' @click='register'>注册</button>
+				<router-link to='/login' >去登录</router-link>
 			</form>
 		</div>
 		<Footer></Footer>
@@ -40,8 +41,10 @@ export default {
 		register: function(){
 			let req = { account:this.account, pwd:this.pwd, re_pwd:this.re_pwd};
 			this.$api.post('/user/register', req, r => {
-				console.log(r);
 				if(r.result === 0){
+					localStorage.change_time = Date.now();
+					localStorage.user = JSON.stringify(r.info);
+					this.$store.commit('updateUser', r.info);
 					this.$router.push('/')
 				}else{
 					alert(r.reason)

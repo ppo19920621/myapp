@@ -3,7 +3,8 @@
 		<Header></Header>
 		<img src='/static/image/dota.jpg' alt='dota'>
 		<h3>个人资料</h3>
-		<div v-for='(value, key) in info'>{{key}}:{{value}}</div>
+		<div v-for='(value, key) in user'>{{key}}:{{value}}</div>
+		<button type='button' @click='layout'>登出</button>
 		<Footer></Footer>
 	</div>
 </template>
@@ -11,31 +12,50 @@
 <script>
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
+import { mapGetters } from 'vuex'
+
 export default {
 	components:{ Header,Footer},
 	data(){
 		return {
-			info:{}
 		}
 	},
+	computed:{
+		...mapGetters([
+			'user',
+			'login'
+		])		 
+	},
 	created(){
-		// 组件创建完后获取数据
-		this.getData()
+		// 组件创建完后获取用户数据
+		this.getUser();
 	},
 	methods:{
-		getData(){
-			// 这里用全局绑定的$api方法来获取数据	
-			this.$api.get('/user/get_user_info', null, r => {
-				console.log(r);
+		getUser(){
+			console.log('getUser')
+			this.$store.dispatch('updateUser')
+				.then(r => {
+					if(!this.login){
+						alert('未登录')
+						this.$router.push('/login');
+					}
+				})
+				.catch(e => console.error(e))
+		},
+		layout(){
+			console.log('layout');
+			this.$api.get('/user/layout', null, r => {
 				if(r.result === 0){
-					this.info = r.info	
-					this.$store.commit('updateUser', r.info)
+					localStorage.removeItem('change_time');
+					localStorage.removeItem('user');
+					this.$store.commit('removeUser');
+					alert('登出成功！');
+					this.$router.go(0);
 				}else{
-					alert(r.reason)
-					this.$router.push('/login')
+					alert(r.searon);
 				}
-			})
-		},		
+			});
+		},
 	},
 }
 </script>
