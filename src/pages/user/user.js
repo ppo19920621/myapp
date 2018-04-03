@@ -8,9 +8,9 @@ import store from './store'
 
 
 // 引用api文件
-import api from '@/api/index.js'
+import axios from '@/api/ajax.js'
 // 将api方法绑定到全局
-Vue.prototype.$api = api
+Vue.prototype.$axios = axios
 
 
 Vue.config.productionTip = false

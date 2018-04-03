@@ -1,4 +1,4 @@
-function goodTime (str) {
+export function goodTime (str) {
     let now = new Date().getTime()
     let oldTime = new Date(str).getTime()
     let difference = now - oldTime
@@ -61,14 +61,31 @@ function _getJS(url){
 	return promise
 }
 
-async function getJS(js_list){
+export async function getJS(js_list){
 	for(let i in js_list){
 		let a = await _getJS(js_list[i])
 		console.log('get js file success')
 	}
 }
 
-export default {
-	goodTime,
-	getJS
+
+function _toType(obj){
+  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+}
+
+
+export function filterNull(o){
+  for(var key in o){
+    if(o[key] === null){
+      delete o[key]
+    }
+    if(_toType(o[key]) === 'string'){
+      o[key] = o[key].trim()
+    }else if(_toType(o[key]) === 'object'){
+      o[key] = filterNull(o[key])
+    }else if(_toType(o[key]) === 'array'){
+      o[key] = filterNull(o[key])
+    }
+  }
+  return o
 }

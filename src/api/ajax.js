@@ -1,25 +1,12 @@
-var root = ''
-var axios = require('axios')
+// axios封装
 
-function toType(obj){
-	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-}
+import axios from 'axios'
+import { filterNull } from './utils'
 
-function filterNull(o){
-	for(var key in o){
-		if(o[key] === null){
-			delete o[key]
-		}
-		if(toType(o[key]) === 'string'){
-			o[key] = o[key].trim()
-		}else if(toType(o[key]) === 'object'){
-			o[key] = filterNull(o[key])
-		}else if(toType(o[key]) === 'array'){
-			o[key] = filterNull(o[key])
-		}
-	}
-	return o
-}
+// axios 配置
+axios.defaults.timeout = 5000;
+axios.defaults.baseURL = '';
+
 
 function apiAxios(method, url, params, success){
 	if(params){
@@ -30,7 +17,7 @@ function apiAxios(method, url, params, success){
 		url:url,
 		data:method === 'POST' || method === 'PUT' ? params:null,
 		params:method === 'GET' || method === 'DELETE' ? params:null,
-		baseURL:root,
+		baseURL:baseURL,
 		withCredentials:false
 	})
 	.then(function(res){

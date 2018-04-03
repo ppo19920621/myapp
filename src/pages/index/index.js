@@ -7,9 +7,9 @@ import router from './router'
 console.log(router)
 
 // 引用api文件
-import api from '@/api/index.js'
+import axios from '@/api/ajax.js'
 // 将api方法绑定到全局
-Vue.prototype.$api = api
+Vue.prototype.$axios = axios
 
 // 引用工具文件并绑定到全局
 import utils from '@/api/utils.js'

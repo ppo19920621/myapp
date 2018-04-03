@@ -35,7 +35,7 @@ export default {
 	methods:{
 		getData(){
 			// 这里用全局绑定的$api方法来获取数据	
-			this.$api.get('https://cnodejs.org/api/v1/topics', null, r => {
+			this.$axios.get('https://cnodejs.org/api/v1/topics', null, r => {
 				this.list = r.data	
 			})
 		},		

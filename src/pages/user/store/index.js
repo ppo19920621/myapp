@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
 
-import api from '@/api/index.js'
+import axios from '@/api/ajax.js'
 
 Vue.use(Vuex)
 
@@ -35,7 +35,7 @@ export default new Vuex.Store({
 					commit('updateUser', JSON.parse(localStorage.user));
 				}
 			}else{
-				api.get('/user/get_user_info', null, r => {
+				axios.get('/user/get_user_info', null, r => {
 					if(r.result === 0){
 						localStorage.change_time = Date.now();
 						localStorage.user = JSON.stringify(r.info);

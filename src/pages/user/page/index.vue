@@ -44,7 +44,7 @@ export default {
 		},
 		layout(){
 			console.log('layout');
-			this.$api.get('/user/layout', null, r => {
+			this.$axios.get('/user/layout', null, r => {
 				if(r.result === 0){
 					localStorage.removeItem('change_time');
 					localStorage.removeItem('user');

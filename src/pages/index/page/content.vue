@@ -34,7 +34,7 @@ export default{
 	},
 	methods:{
 		getData(){
-			this.$api.get('https://cnodejs.org/api/v1/topic/'+this.id, null, r =>{
+			this.$axios.get('https://cnodejs.org/api/v1/topic/'+this.id, null, r =>{
 				this.dat = r.data		
 			})
 		}		

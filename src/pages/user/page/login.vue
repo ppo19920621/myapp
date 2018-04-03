@@ -37,7 +37,7 @@ export default {
 		login: function(e){
 			e.preventDefault();
 			let req = { account:this.account, pwd:this.pwd}; 
-			this.$api.post('/user/login', req, r => {
+			this.$axios.post('/user/login', req, r => {
 				if(r.result === 0){
 					localStorage.change_time = Date.now();
 					localStorage.user = JSON.stringify(r.info);
