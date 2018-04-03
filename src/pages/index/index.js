@@ -12,7 +12,7 @@ import axios from '@/api/ajax.js'
 Vue.prototype.$axios = axios
 
 // 引用工具文件并绑定到全局
-import utils from '@/api/utils.js'
+import * as utils from '@/api/utils.js'
 Vue.prototype.$utils = utils
 
 Vue.config.productionTip = false

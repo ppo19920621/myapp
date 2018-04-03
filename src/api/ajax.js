@@ -17,7 +17,6 @@ function apiAxios(method, url, params, success){
 		url:url,
 		data:method === 'POST' || method === 'PUT' ? params:null,
 		params:method === 'GET' || method === 'DELETE' ? params:null,
-		baseURL:baseURL,
 		withCredentials:false
 	})
 	.then(function(res){
