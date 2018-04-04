@@ -23,31 +23,16 @@ export default {
 	computed:{
 		...mapGetters([
 			'user',
-			'login'
 		])		 
 	},
 	created(){
 		// 组件创建完后获取用户数据
-		this.getUser();
 	},
 	methods:{
-		getUser(){
-			console.log('getUser')
-			this.$store.dispatch('updateUser')
-				.then(r => {
-					if(!this.login){
-						alert('未登录')
-						this.$router.push('/login');
-					}
-				})
-				.catch(e => console.error(e))
-		},
 		layout(){
 			console.log('layout');
 			this.$axios.get('/user/layout', null, r => {
 				if(r.result === 0){
-					localStorage.removeItem('change_time');
-					localStorage.removeItem('user');
 					this.$store.commit('removeUser');
 					alert('登出成功！');
 					this.$router.go(0);

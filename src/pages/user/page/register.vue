@@ -14,7 +14,7 @@
 				<input type='password' v-model='re_pwd' />
 				<br />
 				<button type='button' @click='register'>注册</button>
-				<router-link to='/login' >去登录</router-link>
+				<router-link :to="{ path:'login', query:{ redirect:redirect}}" >去登录</router-link>
 			</form>
 		</div>
 		<Footer></Footer>
@@ -29,7 +29,8 @@ export default {
 	components:{ Header, Footer},
 	data(){
 		return {
-			accoutn:'',
+			redirect: decodeURIComponent(this.$route.query.redirect || '/'),
+			account:'',
 			pwd:'',
 			re_pwd:''
 		}
@@ -42,10 +43,10 @@ export default {
 			let req = { account:this.account, pwd:this.pwd, re_pwd:this.re_pwd};
 			this.$axios.post('/user/register', req, r => {
 				if(r.result === 0){
-					localStorage.change_time = Date.now();
-					localStorage.user = JSON.stringify(r.info);
 					this.$store.commit('updateUser', r.info);
-					this.$router.push('/')
+					this.$router.push({
+						path: this.redirect		
+					})
 				}else{
 					alert(r.reason)
 				}

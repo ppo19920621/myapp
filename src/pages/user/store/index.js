@@ -18,30 +18,34 @@ export default new Vuex.Store({
 		login:(state) => state.login
 	},
 	mutations:{
-		updateUser (state, user){
+		updateUser (state, user, local=true){
+			if(local){
+				localStorage.login_time = Date.now();
+				localStorage.user = JSON.stringify(user);
+			}
 			state.login = true;
 			state.user = user;
 		},
 		removeUser (state){
+			localStorage.removeItem('login_time');
+			localStorage.removeItem('user');
 			state.login = false;
 			state.user = {};
 		}
 	},
 	actions:{
-		updateUser({ commit }){
-			if(localStorage.change_time && localStorage.change_time > Date.now() - 30*60*1000){
+		getUser({ commit }){
+			if(localStorage.login_time && localStorage.login_time > Date.now() - 30*60*1000){
 				let info = localStorage.user;
 				if(info){
-					commit('updateUser', JSON.parse(localStorage.user));
+					commit('updateUser', JSON.parse(localStorage.user), false);
 				}
 			}else{
 				axios.get('/user/get_user_info', null, r => {
 					if(r.result === 0){
-						localStorage.change_time = Date.now();
-						localStorage.user = JSON.stringify(r.info);
 						commit('updateUser', r.info);
 					}else{
-						localStorage.change_time = Date.now();
+						localStorage.login_time = Date.now();
 					}
 				})
 			}
