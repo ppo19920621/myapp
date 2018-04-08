@@ -16,21 +16,21 @@ export function goodTime (str) {
     let _min = difference / minute
 
     if (_year >= 1) {
-      result = '发表于 ' + ~~(_year) + ' 年前'
+		result = '发表于 ' + ~~(_year) + ' 年前'
     } else if (_month >= 1) {
-      result = '发表于 ' + ~~(_month) + ' 个月前'
+		result = '发表于 ' + ~~(_month) + ' 个月前'
     } else if (_week >= 1) {
-      result = '发表于 ' + ~~(_week) + ' 周前'
+		result = '发表于 ' + ~~(_week) + ' 周前'
     } else if (_day >= 1) {
-      result = '发表于 ' + ~~(_day) + ' 天前'
+		result = '发表于 ' + ~~(_day) + ' 天前'
     } else if (_hour >= 1) {
-      result = '发表于 ' + ~~(_hour) + ' 个小时前'
+		result = '发表于 ' + ~~(_hour) + ' 个小时前'
     } else if (_min >= 1) {
-      result = '发表于 ' + ~~(_min) + ' 分钟前'
+		result = '发表于 ' + ~~(_min) + ' 分钟前'
     } else {
-      result = '刚刚'
+		result = '刚刚'
     }
-    return result
+    return result;
 }
 
 function _getJS(url){
@@ -40,52 +40,53 @@ function _getJS(url){
 		script.type = 'text/javascript';
 		script.defer = true;
 		if(script.readyState){
-			script.onreadystatechange = function(){
+			script.onreadystatechange = function(e){
 				if(script.readyState == 'loaded' || script.readyState == 'complete'){
 					script.onreadystatechange = null;
-					resolve(this);
+					resolve(e);
 				}
 			}
 		}else{
-			script.onload = function(){
-				resolve(this);
+			script.onload = function(e){
+				resolve(e);
 			}
-			script.onerror = function(){
+			script.onerror = function(e){
 				reject(new Error('getjs error'));
 			}
 		}
-		script.src = url
-		document.body.appendChild(script)
+		script.src = url;
+		document.body.appendChild(script);
 	});
 
-	return promise
+	return promise;
 }
 
 export async function getJS(js_list){
 	for(let i in js_list){
-		let a = await _getJS(js_list[i])
-		console.log('get js file success')
+		let e = await _getJS(js_list[i]);
+		console.log('get js file success');
+		console.log(e);
 	}
 }
 
 
 function _toType(obj){
-  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
 
 
 export function filterNull(o){
-  for(var key in o){
-    if(o[key] === null){
-      delete o[key]
-    }
-    if(_toType(o[key]) === 'string'){
-      o[key] = o[key].trim()
-    }else if(_toType(o[key]) === 'object'){
-      o[key] = filterNull(o[key])
-    }else if(_toType(o[key]) === 'array'){
-      o[key] = filterNull(o[key])
-    }
-  }
-  return o
+	for(var key in o){
+		if(o[key] === null){
+			delete o[key];
+		}
+		if(_toType(o[key]) === 'string'){
+			o[key] = o[key].trim();
+	    }else if(_toType(o[key]) === 'object'){
+			o[key] = filterNull(o[key]);
+	    }else if(_toType(o[key]) === 'array'){
+			o[key] = filterNull(o[key]);
+	    }
+	}
+	  return o;
 }
