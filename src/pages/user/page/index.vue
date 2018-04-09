@@ -5,7 +5,7 @@
 		<h3>个人资料</h3>
 		<div v-for='(value, key) in user'>{{key}}:{{value}}</div>
 		<button type='button' @click='layout'>登出</button>
-		<Chat :name='user.uid' ref='chat'></Chat>
+		<Chat :name='user.uid' roomid='test' ref='chat'></Chat>
 		<Footer></Footer>
 	</div>
 </template>
