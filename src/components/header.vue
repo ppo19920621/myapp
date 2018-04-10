@@ -13,10 +13,10 @@
 			<div v-if='login'>
 				<a class="user_link" href="javascript:;" @click='show'>
 					<img src="static/image/dota.jpg">
-					<span>名小吃{{user.account}}</span>
+					<span>{{user.account}}</span>
 				</a>
 				<div class="user_menu" >
-					<dl><router-link :to="{ path:''}" >个人主页</router-link></dl>
+					<dl><router-link :to="{ path:'/'}" >个人主页</router-link></dl>
 					<dl><a href="javascript:;" @click='layout'>退出</a></dl>
 				</div>
 			</div>
