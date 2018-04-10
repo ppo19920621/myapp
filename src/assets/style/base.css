@@ -8,8 +8,8 @@ article, aside, details,figcaption,figure,footer,header,hgroup, menu,nav,section
 display: block;
 }
 /* 初始化 */
-html,body,div,p,a,ul,li,img,table,tr,th,td,input,
-button,textarea,form,label,h1,h2,h3,h4,h5,dl,dt,dd{ margin:0;padding:0;}
+html,body,div,p,a,ul,li,img,table,tr,th,td
+,textarea,form,label,h1,h2,h3,h4,h5,dl,dt,dd{ margin:0;padding:0;}
 html{ 
 	overflow-y:auto; 
 	overflow-x:hidden;
@@ -36,9 +36,13 @@ ul li{
 label{ 
 	vertical-align:middle;
 }
-input{ 
+input{
+	margin:0;
 	text-indent:0.5em;
 	vertical-align:middle;
+}
+button{
+	margin:0;
 }
 img{ 
 	max-width:100%; 

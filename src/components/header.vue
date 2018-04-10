@@ -10,7 +10,7 @@
 		</div>
 
 		<div class='userinfo'>
-			<div v-if='!login'>
+			<div v-if='login'>
 				<a class="user_link" href="javascript:;" @click='show'>
 					<img src="static/image/dota.jpg">
 					<span>名小吃{{user.account}}</span>
@@ -20,9 +20,10 @@
 					<dl><a href="javascript:;" @click='layout'>退出</a></dl>
 				</div>
 			</div>
-			<div v-else>
+			<div v-else class="before_login">
 				<router-link :to="{ path:'login'}" >登录</router-link>
-				<router-link :to="{ path:'login'}" >注册</router-link>
+				or
+				<router-link :to="{ path:'register'}" >注册</router-link>
 			</div>
 		</div>
 	</header>
@@ -190,8 +191,14 @@ export default{
 	background: #0366d6;
 	color: #fff;
 }
-
-
+.before_login{
+	position: relative;
+	font-size: 14px;
+	color: #586069 ;
+}
+.before_login a{
+	color: #fff;
+}
 
 
 </style>
