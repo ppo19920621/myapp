@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<Header></Header>
 		<a href='/user'>
 			<img src='static/image/dota.jpg' alt='dota'>
 		</a>
@@ -14,15 +13,13 @@
 				</li>
 			</ul>
 		</div>
-		<Footer></Footer>
 	</div>
 </template>
 
 <script>
-import Header from '@/components/header.vue'
-import Footer from '@/components/footer.vue'
+
 export default {
-	components:{ Header,Footer},
+	components:{ },
 	data(){
 		return {
 			list:[]
