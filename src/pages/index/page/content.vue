@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<myHeader></myHeader>
 		<h2 v-text='dat.title'></h2>
 		<p>作者:{{dat.author.loginname}}    发布于:{{$utils.goodTime(dat.create_at)}}</p>
 		<hr>
@@ -12,16 +11,13 @@
 				<article v-html='i.content'></article>
 			</li>
 		</ul>
-		<myFooter></myFooter>
 	</div>
 </template>	
 
 <script>
-import myHeader from '@/components/header.vue'
-import myFooter from '@/components/footer.vue'
 
 export default{
-	components:{ myHeader,myFooter},
+	components:{ },
 	data(){
 		return {
 			id:this.$route.params.id,

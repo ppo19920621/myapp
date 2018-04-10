@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Header></Header>
-		<img src='/static/image/dota.jpg' alt='dota'>
+		<img src='static/image/dota.jpg' alt='dota'>
 		<h3>个人资料</h3>
 		<div v-for='(value, key) in user'>{{key}}:{{value}}</div>
 		<button type='button' @click='layout'>登出</button>
