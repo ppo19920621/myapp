@@ -18,6 +18,12 @@ const router = new VueRouter({
 		},{
 			path:'/login',
 			component: resolve => require(['../page/login.vue'], resolve)
+		},{
+			path:'/chat',
+			meta:{
+				requireAuth: true,
+			},
+			component: resolve => require(['../page/chat.vue'], resolve)
 		}
 	],
 })

@@ -5,7 +5,7 @@
 		</div>
 		<div class='menu'>
 			<dl><a href='/'>首页</a></dl>
-			<dl><a href='javascript:;'>房间</a></dl>
+			<dl><router-link :to="{ path:'chat'}" >房间</router-link></dl>
 
 		</div>
 
@@ -165,7 +165,7 @@ export default{
 .user_menu:after{
 	content: '';
 	position: absolute;
-	top: -6px;
+	top: -5px;
 	left: 15px;
 	width: 0;
 	height: 0;
